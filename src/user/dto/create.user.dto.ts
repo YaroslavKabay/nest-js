@@ -1,6 +1,6 @@
 import {IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min} from "class-validator";
 
-export class UserDto {
+export class CreateUserDto {
     @IsString()
     @IsOptional()
     firstName: string;
@@ -23,6 +23,6 @@ export class UserDto {
     city: string;
 
     @IsBoolean()
-    isConfirmed: string;
+    isConfirmed: boolean;
 
 }

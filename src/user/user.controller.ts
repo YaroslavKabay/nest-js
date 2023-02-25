@@ -1,5 +1,5 @@
 import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
-import {UserDto} from "./dto/user.dto";
+import {CreateUserDto} from "./dto/create.user.dto";
 import {UserService} from "./user.service";
 
 @Controller('users')// name of controller, direction
@@ -14,7 +14,7 @@ export class UserController {
     }
 
     @Post()
-    createUser(@Body() createUserDto: UserDto){ //dto (just naming, data transfer obj)баді яке приходить з фронтаr
+    createUser(@Body() createUserDto: CreateUserDto){ //dto (just naming, data transfer obj)баді яке приходить з фронтаr
         return this.userService.createUser(createUserDto)
     }
 
