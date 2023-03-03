@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 import { CarModule } from './car/car.module';
-import {UserService} from "./user/user.service";
 import {SequelizeModule} from "@nestjs/sequelize";
 import {ConfigModule} from "@nestjs/config";
 import {User} from "./user/user.model";
+import * as process from 'process';
 
 @Module({
   imports: [
@@ -20,12 +19,14 @@ import {User} from "./user/user.model";
           dialect: 'postgres',
           host: process.env.POSTGRES_HOST, // standard env
           port: Number(process.env.POSTGRES_PORT), // порт число, тому приводим до намбера
-          username: process.env.POSTGRES_USERNAME,
-          password: process.env.POSTGRES_PASSWORD,
-          database: process.env.POSTGRES_NAME,
+          // username: process.env.POSTGRES_USERNAME,
+          // password: process.env.POSTGRES_PASSWORD,
+          // database: process.env.POSTGRES_NAME,
+          username: 'postgres',
+          password: 'postgres',
+          database: 'postgres',
           models: [User],
           autoLoadModels: true,
-
     }),
   ],
   controllers: [AppController],
