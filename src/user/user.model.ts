@@ -1,21 +1,24 @@
-import {Column, DataType, Model, Table} from "sequelize-typescript";
+import {BelongsToMany, Column, DataType, HasMany, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
+import {Car} from "../car/car.model";
+import {Role} from "../role/role.model";
+import {UserRole} from "../role/user-role.model";
 
 @Table({tableName: 'users'})
 export class User extends Model<User>{
-    // @Column({
-    //     type: DataType.STRING,
-    //     autoIncrement: true,
-    //     unique: true,
-    //     primaryKey: true
-    // })
-    // id: string;
+    @Column({
+        type: DataType.INTEGER,
+        autoIncrement: true,
+        unique: true,
+        primaryKey: true
+    })
+    id: number;
 
     @ApiProperty({
         example: 'Taras',
         required: false
     })
-    @Column({type: DataType.STRING}) // type of column in db
+    @Column({type: DataType.STRING, allowNull: false}) // type of column in db
     firstName: string;
 
 
@@ -23,7 +26,7 @@ export class User extends Model<User>{
         example: 'Kvas',
         required: false
     })
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.STRING, allowNull: false})
     surName: string;
 
 
@@ -33,7 +36,8 @@ export class User extends Model<User>{
     })
     @Column({
         type: DataType.STRING,
-        unique: true
+        unique: true,
+        allowNull: false
     })
     email: string;
 
@@ -43,7 +47,8 @@ export class User extends Model<User>{
         required: true
     })
     @Column({
-        type: DataType.INTEGER
+        type: DataType.INTEGER,
+        allowNull: true
      })
     age: number;
 
@@ -51,7 +56,7 @@ export class User extends Model<User>{
     @ApiProperty({
         example: 'Lviv'
     })
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.STRING, allowNull: true})
     city: string;
 
 
@@ -59,7 +64,20 @@ export class User extends Model<User>{
         example: true,
         required: true
     })
-    @Column({type: DataType.BOOLEAN})
+    @Column({type: DataType.BOOLEAN, allowNull: false})
     isConfirmed: boolean;
+
+    @ApiProperty({
+        example: 'password',
+        required: true
+    })
+    @Column({type: DataType.STRING, allowNull: false})
+    password: string;
+
+    @HasMany(() => Car)
+    cars: Car[];
+
+    @BelongsToMany(()=> Role,()=>UserRole)
+    roles: Role[]; 
 
 }

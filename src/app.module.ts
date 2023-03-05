@@ -6,7 +6,11 @@ import { CarModule } from './car/car.module';
 import {SequelizeModule} from "@nestjs/sequelize";
 import {ConfigModule} from "@nestjs/config";
 import {User} from "./user/user.model";
+import { RoleModule } from './role/role.module';
 import * as process from 'process';
+import {Car} from "./car/car.model";
+import {Role} from "./role/role.model";
+import {UserRole} from "./role/user-role.model";
 
 @Module({
   imports: [
@@ -25,9 +29,10 @@ import * as process from 'process';
           username: 'postgres',
           password: 'postgres',
           database: 'postgres',
-          models: [User],
+          models: [User, Car, Role, UserRole],
           autoLoadModels: true,
     }),
+      RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
