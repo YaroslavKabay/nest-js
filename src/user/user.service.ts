@@ -8,8 +8,9 @@ import {RoleService} from "../role/role.service";
 @Injectable()
 export class UserService {
 
-    constructor(@InjectModel(User) private userRepository: typeof User,
-                private roleService: RoleService) { //userRepsotiry : типу назва таблички по якій шукаєм юзерів
+    constructor(
+        @InjectModel(User) private userRepository: typeof User,
+        private roleService: RoleService) { //userRepsotiry : типу назва таблички по якій шукаєм юзерів
     }
 
     async getAll  () {
@@ -23,11 +24,6 @@ export class UserService {
         //     throw new NotFoundException({message: 'role is not exist'})
         // }
 
-        // const createdUser = await this.userRepository.create(user);
-        // const role = await this.roleService.getRole('CLIENT');
-        // await createdUser.$set('roles',[role.id]);
-        // return createdUser;
-
         try {
             const createdUser = await this.userRepository.create(user);
             const role = await this.roleService.getRole('CLIENT');
@@ -36,5 +32,9 @@ export class UserService {
         }catch (e) {
             throw new BadRequestException({message: 'bad request'})
         }
+    }
+
+    async findOne(userName: string ){ // ми могли замість юзернейм написати емейл
+        return this.userRepository.findOne({where: {email: userName}})// тоді тут просто потрібно було лишити емейл без двокрапки юн
     }
 }

@@ -1,9 +1,10 @@
-import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Put, UseGuards} from '@nestjs/common';
 import {ApiBadRequestResponse, ApiQuery, ApiResponse, ApiTags} from "@nestjs/swagger";
 
 import {CreateUserDto} from "./dto/create.user.dto";
 import {UserService} from "./user.service";
 import {User} from "./user.model";
+import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 
 @ApiTags('Users')
 @Controller('users')// name of controller, direction
@@ -12,6 +13,7 @@ export class UserController {
     constructor(private readonly userService: UserService) {
     } // connects service to controller
 
+    @UseGuards(JwtAuthGuard)
     @Get()// decorator(could be post & else
     getAllUsers(){
         return this.userService.getAll()

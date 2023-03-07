@@ -11,11 +11,12 @@ import {RoleService} from "../role/role.service";
 import {RoleModule} from "../role/role.module";
 
 @Module({
-  imports: [
+    imports: [
       SequelizeModule.forFeature([User, Car, Role, UserRole]),
       RoleModule
   ], //  будем використовувати такі таблички
-  controllers: [UserController],
-  providers: [UserService,RoleService]
+    controllers: [UserController],
+    providers: [UserService, RoleService],
+    exports:[UserService],
 })
 export class UserModule {}
