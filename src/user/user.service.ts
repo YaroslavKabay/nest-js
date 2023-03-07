@@ -17,10 +17,16 @@ export class UserService {
     }
 
     async createUser(user: CreateUserDto) {
+
         // const role = await this.roleService.getRole('CLIENT');
         // if(!role){
-        //     throw NotFoundException({message: 'role is not exist'})
+        //     throw new NotFoundException({message: 'role is not exist'})
         // }
+
+        // const createdUser = await this.userRepository.create(user);
+        // const role = await this.roleService.getRole('CLIENT');
+        // await createdUser.$set('roles',[role.id]);
+        // return createdUser;
 
         try {
             const createdUser = await this.userRepository.create(user);
@@ -29,7 +35,6 @@ export class UserService {
             return createdUser;
         }catch (e) {
             throw new BadRequestException({message: 'bad request'})
-
         }
     }
 }
