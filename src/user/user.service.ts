@@ -37,4 +37,8 @@ export class UserService {
     async findOne(userName: string ){ // ми могли замість юзернейм написати емейл
         return this.userRepository.findOne({where: {email: userName}})// тоді тут просто потрібно було лишити емейл без двокрапки юн
     }
+
+    async findOneByID(userId: string ){ // ми могли замість юзернейм написати емейл
+        return this.userRepository.findOne({where: {id: userId}})// тоді тут просто потрібно було лишити емейл без двокрапки юн
+    }
 }

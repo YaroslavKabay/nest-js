@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "8eaa3a6e-23b9-4e3f-bfa6-3b61432b43dc",
+		"name": "nestjs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21724424"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "post user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('user-id', pm.response.json().id)",
+									"pm.environment.set('email', pm.response.json().email)",
+									"pm.environment.set('password', pm.response.json().password)// password should be hashed,it' s just an example",
+									"pm.test(\"If response is not empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.surName).to.be.a('string');",
+									"    pm.expect(responseData.age).to.be.a('number');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"fsdfasdasfdsffadsfsdfs\",\n    \"surName\": \"afdsfssfdsafdsdfsdafdsfs\",\n    \"email\": \"adasf33333fsfsdfdfsafdasdfsdffllalalallal@mail.com\",\n    \"age\": 16,\n    \"isConfirmed\": true,\n    \"city\": \"lol\",\n    \"password\": \"lalalalallalal\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('auth-token', pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"setTimeout(function(){",
+									"    console.log('pre-request waiting')",
+									"},1000)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"If response is not empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData[0].surName).to.be.a('string');",
+									"    pm.expect(responseData[0].age).to.be.a('number');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get users by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"If response is not empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.surName).to.be.a('string');",
+									"    pm.expect(responseData.age).to.be.a('number');",
+									"});",
+									"",
+									"pm.test(\"If userId is correct\",  () => {",
+									"    const userId = pm.environment.get('user-id') ",
+									"    pm.expect(userId).to.equal(pm.response.json().id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/{{user-id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "post role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": \"CLIENT\",\n    \"descriprion\": \"user of the website\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": []
+		}
+	]
+}

@@ -29,7 +29,7 @@ export class UserController {
     @ApiQuery({name: 'id', example: '111142dsf34243as2', type: String})//swagg er
     @Get('/:id')
     getOneUserByID(@Param('id') id:string){
-        return `get by id ${id}`
+        return this.userService.findOneByID(id)
     }
     
     @Put()
