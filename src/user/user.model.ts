@@ -2,7 +2,7 @@ import {Column, DataType, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
 
 @Table({tableName: 'users'})
-export class User extends Model<User>{
+export class User extends Model<User>{ // just model in db
     // @Column({
     //     type: DataType.STRING,
     //     autoIncrement: true,

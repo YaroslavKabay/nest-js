@@ -13,7 +13,7 @@ import * as process from 'process';
       UserModule,
       CarModule,
       ConfigModule.forRoot({
-          envFilePath: '.env'
+          envFilePath: '.env',
       }),
       SequelizeModule.forRoot({
           dialect: 'postgres',
@@ -25,7 +25,7 @@ import * as process from 'process';
           username: 'postgres',
           password: 'postgres',
           database: 'postgres',
-          models: [User],
+          models: [User],// обовʼязково вказуєм таблички(моделі), які ми зробили
           autoLoadModels: true,
     }),
   ],

@@ -20,11 +20,11 @@ export class UserController {
     @ApiBadRequestResponse({status: 400, type: 'Wrong body'}) //??? please make it correct
     @ApiResponse({status: 201, type: User,})
     @Post()
-    createUser(@Body() createUserDto: CreateUserDto){ //dto (just naming, data transfer obj)баді яке приходить з фронтаr
+    createUser(@Body() createUserDto: CreateUserDto){ //dto (just naming, data transfer obj)баді яке приходить з фронта
         return this.userService.createUser(createUserDto)
     }
     
-    @ApiQuery({name: 'id', example: '111142dsf34243as2', type: String})//swagg er
+    @ApiQuery({name: 'id', example: '111142dsf34243as2', type: String})//swagger
     @Get('/:id')
     getOneUserByID(@Param('id') id:string){
         return `get by id ${id}`
