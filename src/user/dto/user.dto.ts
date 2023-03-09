@@ -1,7 +1,7 @@
 import {IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min} from "class-validator";
 
 export class UserDto {
-    @IsString()
+    @IsString()// just validators (do not forget to enable them in main.ts.), всередину дужок можна задавати опції
     @IsOptional()
     firstName: string;
 

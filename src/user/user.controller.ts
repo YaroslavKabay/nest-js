@@ -14,12 +14,12 @@ export class UserController {
     }
 
     @Post()
-    createUser(@Body() createUserDto: UserDto){ //dto (just naming, data transfer obj)баді яке приходить з фронтаr
-        return this.userService.createUser(createUserDto)
+    createUser(@Body() createUserDto: UserDto){ //dto (just naming, data transfer obj)баді яке приходить з фронта
+        return this.userService.createUser(createUserDto)// just service
     }
 
     @Get('/:id')
-    getOneUserByID(@Param('id') id:string){
+    getOneUserByID(@Param('id') id:string){ // params decorator
         return `get by id ${id}`
     }
     @Put()
