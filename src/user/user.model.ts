@@ -14,7 +14,7 @@ export class User extends Model<User>{ // just model in db
     @ApiProperty({
         example: 'Taras',
         required: false
-    })
+    }) // якщо не пропишемо то воно просто відобразить фірст нейм стрінг
     @Column({type: DataType.STRING}) // type of column in db
     firstName: string;
 
