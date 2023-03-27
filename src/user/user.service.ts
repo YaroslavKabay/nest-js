@@ -13,7 +13,7 @@ export class UserService {
     }
 
     async getAll  () {
-        return this.userRepository.findAll({include: {all: true}});
+        return this.userRepository.findAll({include: {all: true}}); // will show all values of users: cars, roles etc
     }
 
     async createUser(user: CreateUserDto) {

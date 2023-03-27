@@ -11,7 +11,7 @@ export class UserController {
 
     constructor(private readonly userService: UserService) {
     } // connects service to controller
-
+    // на несті всі превірки (мідлвари) варто писати на декораторах
     @Get()// decorator(could be post & else
     getAllUsers(){
         return this.userService.getAll()

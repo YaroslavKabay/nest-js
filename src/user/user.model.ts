@@ -74,10 +74,10 @@ export class User extends Model<User>{
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
 
-    @HasMany(() => Car)
-    cars: Car[];
+    @HasMany(() => Car) // Cars(table), user could have many cars
+    cars: Car[]; // поле нащиватиметься карс з масивом карів
 
-    @BelongsToMany(()=> Role,()=>UserRole)
+    @BelongsToMany(()=> Role,()=>UserRole) // could be on mentioned tables
     roles: Role[]; 
 
 }

@@ -28,10 +28,10 @@ export class Car extends Model<Car> {
     @Column({type: DataType.STRING, allowNull: false})
     color: string;
 
-    @ForeignKey(()=> User)
+    @ForeignKey(()=> User)// позначає який юзер з таблички юзерів до цієї таблички закріплений
     @Column({type: DataType.INTEGER, allowNull: false})
     userId: number;
-    @BelongsTo(()=> User)
+    @BelongsTo(()=> User) //?
     client: User
 
 }

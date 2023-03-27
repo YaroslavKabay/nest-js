@@ -15,7 +15,7 @@ export class UserRole extends Model<UserRole>{
     id: number;
 
     @ApiProperty()
-    @ForeignKey(() => User)
+    @ForeignKey(() => User)// it uses  User table
     @Column({type: DataType.INTEGER, allowNull: false}) // type of column in db
     userId: number;
 
