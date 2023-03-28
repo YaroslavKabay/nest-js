@@ -7,9 +7,9 @@ export class CreateUserDto {
         example: 'Taras',
         required: true
     })
-    @IsString()
+    @IsString()// validation for body in *postman for example
     @IsOptional()
-    firstName: string;
+    firstName: string; // just for us to know
 
 
     @ApiProperty({

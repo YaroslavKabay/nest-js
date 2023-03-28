@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         const user = await this.authService.validateUser(userName, password);
         if (!user) {
             throw new UnauthorizedException();
-        }
-        return user;
+        }//якщо юзера не найшло то кине цю помилку,
+        return user;//якщо найшло то поверне юзера
     }
 }

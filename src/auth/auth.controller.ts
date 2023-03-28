@@ -8,7 +8,7 @@ export class AuthController {
     }
     @UseGuards(AuthGuard('local'))
     @Post('login')
-    async login(@Req() req) {
+    async login(@Req() req) { // here mb should be dto (auth dto)
         return this.authService.login(req.user);
     }
 }

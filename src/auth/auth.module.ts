@@ -9,7 +9,7 @@ import {JwtStrategy} from "./jwt.strategy";
 
 @Module({
   imports: [
-      UserModule,
+      UserModule, // we are sharing user module functional to auth module
       JwtModule.register({
         secret: 'secretKey', // need to make const of it
         signOptions: { expiresIn: '60s' },
